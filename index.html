@@ -1,0 +1,1172 @@
+import React, { useState, useEffect } from 'react';
+import { Clock, Moon, Heart, Download, Star, ChevronDown, Mail, Home, ShoppingBag, Phone, Calculator, Calendar, Scale, Timer, Baby, HelpCircle, CheckCircle, AlertTriangle, ChevronRight, ChevronLeft, Plus, Minus, User, FileText, Shield, Scale as ScaleIcon } from 'lucide-react';
+
+const App = () => {
+  const [email, setEmail] = useState('');
+  const [activeTool, setActiveTool] = useState(null);
+  const [showAllFAQs, setShowAllFAQs] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+
+  // Baby Sleep Calculator
+  const [babyAge, setBabyAge] = useState('');
+  const [ageUnit, setAgeUnit] = useState('months');
+  const [sleepResult, setSleepResult] = useState(null);
+
+  // Feeding Schedule Generator
+  const [feedingAge, setFeedingAge] = useState('');
+  const [feedingType, setFeedingType] = useState('breast');
+  const [feedingResult, setFeedingResult] = useState(null);
+
+  // Growth Percentile Estimator
+  const [babyWeight, setBabyWeight] = useState('');
+  const [weightUnit, setWeightUnit] = useState('lb');
+  const [growthAge, setGrowthAge] = useState('');
+  const [growthResult, setGrowthResult] = useState(null);
+
+  // Nap Timer
+  const [awakeTime, setAwakeTime] = useState('');
+  const [napResult, setNapResult] = useState(null);
+
+  // Diaper & Feed Counter (session-based)
+  const [feedCount, setFeedCount] = useState(0);
+  const [diaperCount, setDiaperCount] = useState(0);
+
+  const products = [
+    {
+      id: 1,
+      name: "One-Year Simple Monthly Sleep Tracker Planner (PDF)",
+      price: "$9.99",
+      description: "A simple, year-long baby sleep tracking planner to help parents build consistent sleep routines.",
+      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjiKfGzhJQvBLTnih07BH9fRskAJMB9qFjqNZueqPzAOwzha-tyqMm-zNpRPyRX1kZCiMlungvJOyaozTU5XejxmKTD5nBQ7LITfZibtcfrsqb6Cwsb1kZgcQrk3uVRqM5wP-jKs1BWMXZU0X1cQgLFzup805a3rYe7g_5d8xTj4ttyr168lmTB1wV44V0/s1600/One-Year%20Simple%20Monthly%20Sleep%20Tracker%20Planner%20%20(PDF).png",
+      url: "http://shop.norababysleep.store/l/khemas?layout=profile"
+    },
+    {
+      id: 2,
+      name: "Simple, Clean, and Minimal Sleep Tracker Sheet for Babies (PDF)",
+      price: "$4.99",
+      description: "A minimalist sleep log sheet designed for quick, stress-free daily tracking.",
+      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhU-s4cpOQDb2XRUG2ugALwXHI1PvfewbbW6-AsDFA5XkHiVFbp7AWpbLqSIAp3jKZeM3BJKhSRt2-z5JrjNF17o6AWHFB-qeeoT7eXxj4_DqqvDv7X7JlSG-DBHNafUBSlQZUtDTGAw54wF4t_EvagWhEVezIdCC_YoXnttIbBy7cHW1Zr5cpp-U6aYg8/s1600/Simple%20%2C%20Clean%2C%20and%20Minimal%20Sleep%20Tracker%20Sheet%20for%20Babies.png",
+      url: "http://shop.norabysleep.store/l/rdgkw?layout=profile"
+    },
+    {
+      id: 3,
+      name: "The New Parent’s Guide to NAPS (PDF + Editable Canva Template)",
+      price: "$14.99",
+      description: "A comprehensive nap schedule guide for newborns to toddlers, editable in Canva.",
+      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjqhxQqodfUfgviCzOCsWm6s_oUGgT4g64rMHgIIxQMdfpLzl5r40FLNX543k4XeKoq26WLNo0JioEPFRdByY2GKBJuEqC8Iact5ysNbZ8VnZzKhiZJfRAtcUNG0_Npx_AuF1tOoqZ975X0P-ZfIu9iGiNn9Jj89h3uyECh7_ugJYILwkl5cmNQWP5tkk/s1600/The%20New%20Parent%E2%80%99s%20Guide%20to%20NAPS%20%28PDF%20+%20Editable%20Canva%20Template%29.png",
+      url: "http://shop.norababysleep.store/l/lgahp?layout=profile"
+    },
+    {
+      id: 4,
+      name: "Newborn Care Booklet PDF: Complete Guide for Parents",
+      price: "$19.99",
+      description: "A new parent must-have booklet covering baby sleep, feeding, and care essentials.",
+      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioTFAi4xCyqie1AKqfHzorxWcfAaaolTr1DGdujXSRC3Mk2L1xnft7KvUsdx2hmk4EuJT_0mX3tJAQa3f5scbZH3hQ0TIxFpFO1S_Iw3YCcvRGlwbdZp-MHeSxdSlcg_t09IxRllfR6w5YiAYra6mZ5Ik1Q180Uuo8mqDKb76WV3i9KrwbKENCezYJkp0/s1600/Newborn%20Care%20Booklet%20PDF%20%20%3A%20Complete%20Guide%20for%20Parents.png",
+      url: "http://shop.norababysleep.store/l/ognwi?layout=profile"
+    },
+    {
+      id: 5,
+      name: "Baby Sleep Training eBook (PDF Guide)",
+      price: "$24.99",
+      description: "A step-by-step sleep training guide to help babies sleep through the night without night feedings.",
+      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRO8HO-ap4VWW3zHJmvdKoX9TBI3mIRwOX7c5x3B-O1OA1XyGrUlx1W7OEZG9Sh_-UVw_SZe9EB0MDjJ2B7FT5K7JwLRzvwEZkX0WoKN5fT8OBlOZLmm1o28c8LwNqb1YSq-7c1ZVARDfSg53buciZEDtHgoYTD2Fun-OSaNdhva6x-_FZ3mRmjhY8j1c/s1600/Baby%20Sleep%20Training%20eBook%20%20%3A%20Instant%20Download%20PDF%20Guide%20to%20Help%20Parents%20Get%20Their%20Baby%20to%20Sleep%20Through%20the%20Night%20Without%20Night%20Feedings.png",
+      url: "http://shop.norababysleep.store/l/kcwznv?layout=profile"
+    },
+    {
+      id: 6,
+      name: "The New Parent Starter Kit (Bundle)",
+      price: "$39.99",
+      description: "A starter bundle including sleep trackers, guides, and routines for new parents.",
+      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyB_-XyUrlg4Pr0uU6SYjnhFTBkUpjtrXlAAQedJ0aNQHbwWqXqby6AYZjPgMEmwCLPI_U-QtHQQbAsH0Cc1sO7L6u4-FzEzZ-fNkjcD0HTSS7cv5PeQxPJKxNwxAbB_kKS66QhNWr0_tCHndrPac1tm8zbTKmBm9qiFZ1wJgfyO8YwH06WkMFN_T_YCE/s1600/The%20New%20Parent%20Starter%20Kit.png",
+      url: "http://shop.norababysleep.store/l/TheNewParentStarterKit?layout=profile"
+    },
+    {
+      id: 7,
+      name: "Baby Sleep Training Pack (Bundle)",
+      price: "$49.99",
+      description: "A complete training pack to help parents master baby sleep routines.",
+      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhLqRXQPiWhemB1WEWxRZJriqT_vkXUgsBeV9q5p6Kf5pEOYbjI15uJ-wsSLepsoIbnmJkUJKWXPdoVnL4YtPm8i_60O3-8NOWT6rgt9GjjmzeQr75ICNiwm1hG0W78beSMiswCifLzUseEo7jsDxZsRwCJYJ2As_egnn1kYzBeeUdzZwuLw8CWk8_ZTsE/s1600/Baby%20Sleep%20Training%20Pack.png",
+      url: "http://shop.norababysleep.store/l/BabySleepTrainingPack?layout=profile"
+    },
+    {
+      id: 8,
+      name: "The Ultimate Parent Sleep & Care Bundle",
+      price: "$79.99",
+      description: "Our best-value bundle with all guides, trackers, and sleep training resources in one package.",
+      image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEijkF9mm6XGNuuoSSRhB5tlksCzJgoQpwO2YhP14kt2W5RfNwpeu-akZJUgze3Nc3DWO92ytsOO81Yd7JgfxSeJDX0yzCeFgJ7B2ucl8TQ-XxyWJxa6f-eIle933goEKIIlYSnnfKi3ekRFty0UtAOojEKXKBJetdOISg6HwC2B8F0Fv_B2-tYqxohI9mI/s1600/The%20Ultimate%20Parent%20Sleep%20%26%20Care%20Bundle.png",
+      url: "http://shop.norababysleep.store/l/TheUltimateParentSleepandCareBundle?layout=profile"
+    }
+  ];
+
+  const testimonials = [
+    {
+      id: 1,
+      text: "The sleep training pack changed our lives! Our baby sleeps through the night now.",
+      author: "Sarah M.",
+      avatar: "https://placehold.co/60x60/ff6b9d/ffffff?text=SM"
+    },
+    {
+      id: 2,
+      text: "I was exhausted and overwhelmed. These guides gave me the confidence to establish a routine that works for our family.",
+      author: "Michael R.",
+      avatar: "https://placehold.co/60x60/4ecdc4/ffffff?text=MR"
+    },
+    {
+      id: 3,
+      text: "The newborn care booklet is worth every penny. It answered all my questions and helped me feel prepared.",
+      author: "Emma L.",
+      avatar: "https://placehold.co/60x60/ffd166/ffffff?text=EL"
+    },
+    {
+      id: 4,
+      text: "After weeks of sleepless nights, your sleep tracker helped us identify patterns and fix our routine. Thank you!",
+      author: "Jessica T.",
+      avatar: "https://placehold.co/60x60/ff9e7d/ffffff?text=JT"
+    },
+    {
+      id: 5,
+      text: "The nap guide is incredible! My 8-month-old now takes consistent 2-hour naps instead of 30-minute catnaps.",
+      author: "David K.",
+      avatar: "https://placehold.co/60x60/88d8b0/ffffff?text=DK"
+    },
+    {
+      id: 6,
+      text: "As a first-time dad, I was clueless about baby sleep. Your guides made everything so clear and actionable.",
+      author: "Robert P.",
+      avatar: "https://placehold.co/60x60/b5b5b5/ffffff?text=RP"
+    },
+    {
+      id: 7,
+      text: "The feeding schedule generator helped me establish a routine that works perfectly for my twins!",
+      author: "Amanda B.",
+      avatar: "https://placehold.co/60x60/e0bbff/ffffff?text=AB"
+    },
+    {
+      id: 8,
+      text: "I've tried everything, but your gentle sleep training method actually worked without tears. Miracle!",
+      author: "Lisa C.",
+      avatar: "https://placehold.co/60x60/ffb347/ffffff?text=LC"
+    },
+    {
+      id: 9,
+      text: "The starter kit is the best investment I've made as a new parent. Everything I needed in one place!",
+      author: "Thomas W.",
+      avatar: "https://placehold.co/60x60/77dd77/ffffff?text=TW"
+    },
+    {
+      id: 10,
+      text: "My baby went from waking every 2 hours to sleeping 11 hours straight! Your methods are truly effective.",
+      author: "Nicole F.",
+      avatar: "https://placehold.co/60x60/ff6961/ffffff?text=NF"
+    },
+    {
+      id: 11,
+      text: "The sleep trackers are so easy to use and have helped me stay consistent with our routine.",
+      author: "Brian M.",
+      avatar: "https://placehold.co/60x60/c7c7c7/ffffff?text=BM"
+    },
+    {
+      id: 12,
+      text: "I finally feel like I have control over my baby's sleep schedule. These resources are worth their weight in gold!",
+      author: "Rachel S.",
+      avatar: "https://placehold.co/60x60/ffd1dc/ffffff?text=RS"
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "What is the 3-3-3 rule for baby sleep?",
+      answer: "The 3-3-3 rule suggests that by 3 months old, babies should be taking 3 naps per day, with 3 hours of awake time between naps, and sleeping for 3-hour stretches at night."
+    },
+    {
+      question: "What do you need for baby sleep?",
+      answer: "Essential items include a safe crib with firm mattress, fitted sheet, sleep sack or swaddle, white noise machine, blackout curtains, and a consistent bedtime routine."
+    },
+    {
+      question: "What is the best baby sleep aid?",
+      answer: "White noise machines, sleep sacks, and consistent bedtime routines are among the most effective and safe sleep aids. Avoid sleep positioners or loose bedding."
+    },
+    {
+      question: "How to stop baby from waking every hour?",
+      answer: "Establish consistent sleep routines, ensure proper feeding during the day, create a sleep-conducive environment, and gradually teach self-soothing skills appropriate for your baby's age."
+    },
+    {
+      question: "What is the fastest sleep training method?",
+      answer: "The 'Cry It Out' (Extinction) method can show results in 3-7 days, but gentler methods like 'Ferber' or 'Chair Method' may take 1-2 weeks with less stress for both baby and parents."
+    },
+    {
+      question: "What is the best sleeping method for babies?",
+      answer: "The safest method is placing baby on their back in a crib with a firm mattress, no loose bedding, and in the same room as parents for the first 6-12 months (room-sharing without bed-sharing)."
+    },
+    {
+      question: "What age is cosleeping no longer safe?",
+      answer: "The American Academy of Pediatrics recommends room-sharing without bed-sharing for at least the first 6 months, ideally for the first year, due to SIDS risk reduction."
+    },
+    {
+      question: "How to tell if baby is too hot at night?",
+      answer: "Check the back of baby's neck - if it's sweaty or hot to touch, they're likely too warm. Ideal room temperature is 68-72°F (20-22°C). Dress baby in one more layer than you're comfortable in."
+    },
+    {
+      question: "What helps a baby sleep naturally?",
+      answer: "Consistent routines, exposure to natural light during the day, avoiding screens before bedtime, proper feeding schedules, and creating a calm, dark sleep environment."
+    },
+    {
+      question: "What medicine can I give my baby to sleep at night?",
+      answer: "Never give sleep medication to babies without explicit direction from a pediatrician. Most sleep issues are behavioral and resolved through routine and sleep training, not medication."
+    },
+    {
+      question: "How to improve baby sleep overnight?",
+      answer: "Focus on daytime routines first - ensure adequate feeding, appropriate awake windows, and consistent nap schedules. Night improvements typically follow within 3-7 days of consistent daytime structure."
+    },
+    {
+      question: "How to sleep train a 2 month old?",
+      answer: "At 2 months, focus on establishing routines and gentle sleep habits rather than formal sleep training. Put baby down drowsy but awake, maintain consistent bedtime routines, and respond to needs promptly."
+    },
+    {
+      question: "What is the 3am rule?",
+      answer: "The '3am rule' suggests that if your baby wakes at 3am, avoid stimulating activities. Keep lights dim, interactions minimal, and focus only on feeding if truly necessary, then return to sleep quickly."
+    },
+    {
+      question: "What to do when baby won't sleep?",
+      answer: "Check for hunger, discomfort, or overstimulation. Ensure the sleep environment is conducive to rest. Sometimes a brief period of gentle rocking or walking can help, followed by putting baby down drowsy but awake."
+    },
+    {
+      question: "Should I let my baby cry it out?",
+      answer: "This is a personal decision that depends on your parenting philosophy and baby's age. Cry-it-out methods are generally not recommended before 4-6 months. Always consult your pediatrician for guidance."
+    },
+    {
+      question: "How many naps for a 6 month old?",
+      answer: "Most 6-month-olds take 2-3 naps per day, totaling 2-3 hours of daytime sleep, with the third nap often being a short catnap in the late afternoon."
+    },
+    {
+      question: "What age is sleep training most successful?",
+      answer: "Sleep training is typically most effective between 4-6 months when babies have developed more predictable sleep patterns and can go longer stretches without feeding."
+    },
+    {
+      question: "How to get baby to sleep through the night without feeding?",
+      answer: "Ensure adequate daytime feeding, establish consistent bedtime routines, gradually reduce night feedings if baby is developmentally ready (usually 6+ months), and teach self-soothing skills."
+    },
+    {
+      question: "What are common sleep training mistakes?",
+      answer: "Starting too early, inconsistency, not addressing underlying issues like hunger or discomfort, expecting immediate results, and not having a clear plan or support system."
+    },
+    {
+      question: "How to stop contact naps?",
+      answer: "Gradually transition by starting naps in your arms, then moving to a stationary surface while maintaining contact, then slowly reducing physical contact over several days or weeks."
+    },
+    {
+      question: "What age is SIDS a risk?",
+      answer: "SIDS risk is highest between 1-4 months, with 90% of cases occurring before 6 months. Risk significantly decreases after 6 months but safe sleep practices should continue through the first year."
+    },
+    {
+      question: "Do pediatricians recommend co-sleeping?",
+      answer: "Pediatricians recommend room-sharing (baby in own crib in parents' room) but not bed-sharing due to increased SIDS and suffocation risks. Always follow safe sleep guidelines."
+    },
+    {
+      question: "How to tell if a baby is overtired?",
+      answer: "Signs include fussiness, difficulty settling, rubbing eyes, yawning, arching back, and paradoxically becoming more alert or hyperactive when they should be sleepy."
+    },
+    {
+      question: "What are signs of baby sleep problems?",
+      answer: "Frequent night wakings beyond age-appropriate needs, difficulty falling asleep, short naps (under 30-45 minutes consistently), early morning wakings, and excessive fussiness related to sleep."
+    },
+    {
+      question: "How long to hold a baby before putting down?",
+      answer: "Hold until baby is in a deep sleep (limp limbs, regular breathing, no eye movement) which typically takes 10-20 minutes after they fall asleep. This reduces the startle reflex that can wake them."
+    },
+    {
+      question: "Should I let my 3 month old take a 3 hour nap?",
+      answer: "Long naps during the day can interfere with night sleep. For 3-month-olds, aim to wake baby after 2-2.5 hours of daytime sleep to maintain balanced day/night sleep cycles."
+    },
+    {
+      question: "What is ABC sleep?",
+      answer: "ABC stands for Alone, on their Back, in a Crib - the safe sleep guidelines recommended by the American Academy of Pediatrics to reduce SIDS risk."
+    },
+    {
+      question: "When to stop swaddling?",
+      answer: "Stop swaddling when baby shows signs of rolling over (usually 2-4 months) or when they break out of the swaddle consistently. Transition to a sleep sack with arms free."
+    },
+    {
+      question: "How to teach baby to fall asleep independently?",
+      answer: "Put baby down drowsy but awake, establish consistent bedtime routines, respond consistently to night wakings, and gradually reduce sleep associations like rocking or feeding to sleep."
+    },
+    {
+      question: "Is a 20 minute nap ok for babies?",
+      answer: "Short naps (20-30 minutes) are normal for newborns but by 4-6 months, most babies should be able to take longer naps (45+ minutes). Consistently short naps may indicate overtiredness or schedule issues."
+    },
+    {
+      question: "What is normal baby sleep?",
+      answer: "Newborns sleep 14-17 hours in 24 hours with no day/night distinction. By 6 months, most sleep 12-15 hours with 2-3 naps. Individual variations are normal within these ranges."
+    },
+    {
+      question: "How many hours should a baby sleep?",
+      answer: "Newborns (0-3 months): 14-17 hours, Infants (4-11 months): 12-15 hours, Toddlers (1-2 years): 11-14 hours. This includes both nighttime sleep and naps."
+    },
+    {
+      question: "When to stop night feed?",
+      answer: "Most babies can go 8-12 hours without feeding by 6 months if they're growing well and getting adequate nutrition during the day. Always consult your pediatrician before eliminating night feeds."
+    },
+    {
+      question: "What is the 2 3 4 rule for baby sleep?",
+      answer: "This rule suggests 2 hours awake before first nap, 3 hours before second nap, and 4 hours before bedtime. It's a guideline for 6+ month olds to establish predictable nap schedules."
+    },
+    {
+      question: "At what age can I stop worrying about SIDS?",
+      answer: "SIDS risk drops significantly after 6 months and is very rare after 12 months, but safe sleep practices should continue through the first year as a precaution."
+    },
+    {
+      question: "Why put the baby to bed at 7?",
+      answer: "An early bedtime (6:30-7:30pm) aligns with babies' natural circadian rhythms, prevents overtiredness, and often results in better quality sleep and fewer night wakings."
+    }
+  ];
+
+  // Auto-rotate testimonials every 20 seconds, pause on hover
+  useEffect(() => {
+    if (isHovering) return;
+    
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 20000);
+    
+    return () => clearInterval(interval);
+  }, [testimonials.length, isHovering]);
+
+  // Baby Sleep Calculator Logic
+  const calculateSleepSchedule = () => {
+    const age = parseFloat(babyAge);
+    if (isNaN(age) || age <= 0) return;
+
+    let result = {};
+    if (ageUnit === 'weeks') {
+      const months = age / 4;
+      if (months < 1) {
+        result = { naps: "8-12", awakeWindow: "45-60 min", totalSleep: "14-17 hrs" };
+      } else if (months < 2) {
+        result = { naps: "6-8", awakeWindow: "60-90 min", totalSleep: "14-16 hrs" };
+      } else if (months < 4) {
+        result = { naps: "4-6", awakeWindow: "1.5-2 hrs", totalSleep: "14-15 hrs" };
+      } else {
+        result = { naps: "3-4", awakeWindow: "2-2.5 hrs", totalSleep: "14-15 hrs" };
+      }
+    } else {
+      if (age < 1) {
+        result = { naps: "4-6", awakeWindow: "1.5-2 hrs", totalSleep: "14-15 hrs" };
+      } else if (age < 3) {
+        result = { naps: "3-4", awakeWindow: "2-2.5 hrs", totalSleep: "14-15 hrs" };
+      } else if (age < 6) {
+        result = { naps: "3", awakeWindow: "2.5-3 hrs", totalSleep: "14 hrs" };
+      } else if (age < 9) {
+        result = { naps: "2-3", awakeWindow: "2.5-3.5 hrs", totalSleep: "13-14 hrs" };
+      } else if (age < 12) {
+        result = { naps: "2", awakeWindow: "3-4 hrs", totalSleep: "13-14 hrs" };
+      } else if (age < 18) {
+        result = { naps: "1-2", awakeWindow: "3.5-4.5 hrs", totalSleep: "13-14 hrs" };
+      } else {
+        result = { naps: "1", awakeWindow: "4-6 hrs", totalSleep: "12-14 hrs" };
+      }
+    }
+    setSleepResult(result);
+  };
+
+  // Feeding Schedule Generator Logic
+  const generateFeedingSchedule = () => {
+    const age = parseFloat(feedingAge);
+    if (isNaN(age) || age <= 0) return;
+
+    let result = {};
+    if (feedingType === 'breast') {
+      if (age < 1) {
+        result = { frequency: "8-12", amount: "On demand (2-4 oz)" };
+      } else if (age < 3) {
+        result = { frequency: "7-9", amount: "On demand (3-4 oz)" };
+      } else if (age < 6) {
+        result = { frequency: "6-8", amount: "On demand (4-6 oz)" };
+      } else if (age < 9) {
+        result = { frequency: "5-7", amount: "On demand (6-8 oz)" };
+      } else {
+        result = { frequency: "4-6", amount: "On demand (6-8 oz)" };
+      }
+    } else {
+      if (age < 1) {
+        result = { frequency: "8-12", amount: "2-4 oz" };
+      } else if (age < 3) {
+        result = { frequency: "6-8", amount: "4-5 oz" };
+      } else if (age < 6) {
+        result = { frequency: "5-6", amount: "4-6 oz" };
+      } else if (age < 9) {
+        result = { frequency: "4-5", amount: "6-7 oz" };
+      } else {
+        result = { frequency: "3-4", amount: "7-8 oz" };
+      }
+    }
+    setFeedingResult(result);
+  };
+
+  // Growth Percentile Estimator Logic
+  const estimateGrowthPercentile = () => {
+    const weight = parseFloat(babyWeight);
+    const age = parseFloat(growthAge);
+    if (isNaN(weight) || isNaN(age) || weight <= 0 || age <= 0) return;
+
+    // Convert kg to lb if needed
+    const weightInLb = weightUnit === 'kg' ? weight * 2.20462 : weight;
+
+    // Simplified weight ranges (in pounds)
+    const weightRanges = {
+      0: { min: 6, avg: 7.5, max: 9 },
+      1: { min: 8, avg: 9.5, max: 11 },
+      2: { min: 9, avg: 11, max: 13 },
+      3: { min: 10, avg: 12.5, max: 15 },
+      6: { min: 13, avg: 16, max: 19 },
+      9: { min: 15, avg: 18.5, max: 22 },
+      12: { min: 17, avg: 21, max: 25 }
+    };
+
+    let closestAge = 0;
+    let minDiff = Infinity;
+    Object.keys(weightRanges).forEach(ageKey => {
+      const diff = Math.abs(age - parseInt(ageKey));
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestAge = parseInt(ageKey);
+      }
+    });
+
+    const range = weightRanges[closestAge];
+    if (weightInLb < range.min) {
+      setGrowthResult("Below Average");
+    } else if (weightInLb > range.max) {
+      setGrowthResult("Above Average");
+    } else {
+      setGrowthResult("Average");
+    }
+  };
+
+  // Nap Timer Logic
+  const calculateNapTime = () => {
+    if (!awakeTime) return;
+    
+    const awakeDate = new Date(awakeTime);
+    const age = parseFloat(babyAge) || 6; // default to 6 months
+    let awakeWindow = 2.5; // default 2.5 hours
+    
+    if (age < 3) awakeWindow = 1.5;
+    else if (age < 6) awakeWindow = 2;
+    else if (age < 9) awakeWindow = 2.5;
+    else if (age < 12) awakeWindow = 3;
+    else awakeWindow = 3.5;
+    
+    const napTime = new Date(awakeDate.getTime() + awakeWindow * 60 * 60 * 1000);
+    setNapResult(napTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+  };
+
+  const scrollToProducts = () => {
+    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const ToolCard = ({ icon: Icon, title, description, onClick }) => (
+    <div 
+      className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer border border-gray-100 hover:border-pink-200 transform hover:scale-105"
+      onClick={onClick}
+    >
+      <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4">
+        <Icon className="h-6 w-6 text-pink-600" />
+      </div>
+      <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
+      <p className="text-gray-600 text-sm">{description}</p>
+    </div>
+  );
+
+  const renderToolContent = () => {
+    switch (activeTool) {
+      case 'sleep':
+        return (
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="mb-4 p-4 bg-blue-50 rounded-lg">
+              <h4 className="font-semibold text-blue-800 mb-2 flex items-center">
+                <HelpCircle className="mr-2 h-4 w-4" />
+                How to Use This Tool
+              </h4>
+              <p className="text-sm text-blue-700">
+                Enter your baby's age in weeks or months to get personalized sleep recommendations based on current pediatric guidelines. 
+                Results are estimates - always consult your pediatrician for medical advice.
+              </p>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Baby Sleep Calculator</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Baby's Age</label>
+                <div className="flex gap-2 flex-col sm:flex-row">
+                  <input
+                    type="number"
+                    value={babyAge}
+                    onChange={(e) => setBabyAge(e.target.value)}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    placeholder="Enter age"
+                    min="0"
+                    step="0.1"
+                  />
+                  <select
+                    value={ageUnit}
+                    onChange={(e) => setAgeUnit(e.target.value)}
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  >
+                    <option value="weeks">Weeks</option>
+                    <option value="months">Months</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                onClick={calculateSleepSchedule}
+                className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Calculate Sleep Schedule
+              </button>
+              {sleepResult && (
+                <div className="mt-4 p-4 bg-green-50 rounded-lg">
+                  <div className="flex items-center mb-2">
+                    <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
+                    <h4 className="font-semibold text-green-800">Recommended Schedule:</h4>
+                  </div>
+                  <div className="space-y-1">
+                    <p><strong>Naps per day:</strong> {sleepResult.naps}</p>
+                    <p><strong>Awake window:</strong> {sleepResult.awakeWindow}</p>
+                    <p><strong>Total sleep:</strong> {sleepResult.totalSleep}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      case 'feeding':
+        return (
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="mb-4 p-4 bg-blue-50 rounded-lg">
+              <h4 className="font-semibold text-blue-800 mb-2 flex items-center">
+                <HelpCircle className="mr-2 h-4 w-4" />
+                How to Use This Tool
+              </h4>
+              <p className="text-sm text-blue-700">
+                Enter your baby's age in months and select feeding type to get personalized feeding recommendations. 
+                Remember that every baby is different - these are general guidelines based on average needs.
+              </p>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Feeding Schedule Generator</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Baby's Age (months)</label>
+                <input
+                  type="number"
+                  value={feedingAge}
+                  onChange={(e) => setFeedingAge(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  placeholder="Enter age in months"
+                  min="0"
+                  step="0.1"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Feeding Type</label>
+                <select
+                  value={feedingType}
+                  onChange={(e) => setFeedingType(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                >
+                  <option value="breast">Breastfeeding</option>
+                  <option value="formula">Formula</option>
+                </select>
+              </div>
+              <button
+                onClick={generateFeedingSchedule}
+                className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Generate Feeding Schedule
+              </button>
+              {feedingResult && (
+                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                  <div className="flex items-center mb-2">
+                    <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                    <h4 className="font-semibold text-blue-800">Recommended Schedule:</h4>
+                  </div>
+                  <div className="space-y-1">
+                    <p><strong>Feeds per day:</strong> {feedingResult.frequency}</p>
+                    <p><strong>Amount per feed:</strong> {feedingResult.amount}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      case 'growth':
+        return (
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="mb-4 p-4 bg-blue-50 rounded-lg">
+              <h4 className="font-semibold text-blue-800 mb-2 flex items-center">
+                <HelpCircle className="mr-2 h-4 w-4" />
+                How to Use This Tool
+              </h4>
+              <p className="text-sm text-blue-700">
+                Enter your baby's current weight and age to get a rough growth percentile estimate. 
+                <span className="font-semibold text-red-600"> This is NOT a medical assessment</span> - always consult your pediatrician for accurate growth monitoring.
+              </p>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Growth Percentile Estimator</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Baby's Weight</label>
+                <div className="flex gap-2 flex-col sm:flex-row">
+                  <input
+                    type="number"
+                    value={babyWeight}
+                    onChange={(e) => setBabyWeight(e.target.value)}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    placeholder="Enter weight"
+                    min="0"
+                    step="0.1"
+                  />
+                  <select
+                    value={weightUnit}
+                    onChange={(e) => setWeightUnit(e.target.value)}
+                    className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  >
+                    <option value="lb">Pounds</option>
+                    <option value="kg">Kilograms</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Baby's Age (months)</label>
+                <input
+                  type="number"
+                  value={growthAge}
+                  onChange={(e) => setGrowthAge(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  placeholder="Enter age in months"
+                  min="0"
+                  step="0.1"
+                />
+              </div>
+              <button
+                onClick={estimateGrowthPercentile}
+                className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Estimate Growth Percentile
+              </button>
+              {growthResult && (
+                <div className="mt-4 p-4 bg-purple-50 rounded-lg">
+                  <div className="flex items-center mb-2">
+                    <AlertTriangle className="h-5 w-5 text-purple-600 mr-2" />
+                    <h4 className="font-semibold text-purple-800">Growth Assessment:</h4>
+                  </div>
+                  <p className="text-lg font-bold text-purple-900">{growthResult}</p>
+                  <p className="text-sm text-purple-700 mt-2">
+                    <span className="font-semibold">Important:</span> This is a simplified estimate only. Always consult your pediatrician for accurate growth assessment.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      case 'nap':
+        return (
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="mb-4 p-4 bg-blue-50 rounded-lg">
+              <h4 className="font-semibold text-blue-800 mb-2 flex items-center">
+                <HelpCircle className="mr-2 h-4 w-4" />
+                How to Use This Tool
+              </h4>
+              <p className="text-sm text-blue-700">
+                Select when your baby last woke up to calculate the optimal next nap time based on age-appropriate awake windows. 
+                This helps prevent overtiredness and promotes better sleep quality.
+              </p>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Nap Timer / Bedtime Countdown</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">When did baby wake up?</label>
+                <input
+                  type="datetime-local"
+                  value={awakeTime}
+                  onChange={(e) => setAwakeTime(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                />
+              </div>
+              <button
+                onClick={calculateNapTime}
+                className="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Calculate Next Nap Time
+              </button>
+              {napResult && (
+                <div className="mt-4 p-4 bg-orange-50 rounded-lg">
+                  <div className="flex items-center mb-2">
+                    <Timer className="h-5 w-5 text-orange-600 mr-2" />
+                    <h4 className="font-semibold text-orange-800">Next Nap Time:</h4>
+                  </div>
+                  <p className="text-xl font-bold text-orange-900">Put baby down at {napResult}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      case 'counter':
+        return (
+          <div className="bg-white p-6 rounded-xl shadow-lg">
+            <div className="mb-4 p-4 bg-blue-50 rounded-lg">
+              <h4 className="font-semibold text-blue-800 mb-2 flex items-center">
+                <HelpCircle className="mr-2 h-4 w-4" />
+                How to Use This Tool
+              </h4>
+              <p className="text-sm text-blue-700">
+                Track your baby's daily feeds and diaper changes with simple click counters. 
+                Counters reset automatically when you refresh the page - perfect for daily tracking!
+              </p>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Diaper Change & Feed Counter</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="text-center p-6 bg-pink-50 rounded-lg">
+                <Baby className="h-8 w-8 text-pink-600 mx-auto mb-2" />
+                <p className="text-3xl font-bold text-pink-600 mb-2">{feedCount}</p>
+                <p className="text-gray-700 mb-3">Feeds Today</p>
+                <div className="flex justify-center gap-2">
+                  <button
+                    onClick={() => setFeedCount(Math.max(0, feedCount - 1))}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-3 rounded-lg transition-all duration-200"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => setFeedCount(feedCount + 1)}
+                    className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+              <div className="text-center p-6 bg-blue-50 rounded-lg">
+                <Baby className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                <p className="text-3xl font-bold text-blue-600 mb-2">{diaperCount}</p>
+                <p className="text-gray-700 mb-3">Diapers Today</p>
+                <div className="flex justify-center gap-2">
+                  <button
+                    onClick={() => setDiaperCount(Math.max(0, diaperCount - 1))}
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-3 rounded-lg transition-all duration-200"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => setDiaperCount(diaperCount + 1)}
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <p className="text-sm text-gray-500 mt-4 text-center">
+              Counters reset when you refresh the page (perfect for daily tracking!).
+            </p>
+          </div>
+        );
+      default:
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <ToolCard
+              icon={Calculator}
+              title="Baby Sleep Calculator"
+              description="Get recommended nap count, awake windows, and total sleep hours based on your baby's age."
+              onClick={() => setActiveTool('sleep')}
+            />
+            <ToolCard
+              icon={Calendar}
+              title="Feeding Schedule Generator"
+              description="Generate personalized feeding schedules based on baby's age and feeding type."
+              onClick={() => setActiveTool('feeding')}
+            />
+            <ToolCard
+              icon={ScaleIcon}
+              title="Growth Percentile Estimator"
+              description="Estimate your baby's growth percentile based on weight and age."
+              onClick={() => setActiveTool('growth')}
+            />
+            <ToolCard
+              icon={Timer}
+              title="Nap Timer / Bedtime Countdown"
+              description="Calculate the optimal next nap or bedtime based on when your baby woke up."
+              onClick={() => setActiveTool('nap')}
+            />
+            <ToolCard
+              icon={Baby}
+              title="Diaper & Feed Counter"
+              description="Track daily feeds and diaper changes with simple click counters."
+              onClick={() => setActiveTool('counter')}
+            />
+          </div>
+        );
+    }
+  };
+
+  const visibleFAQs = showAllFAQs ? faqs : faqs.slice(0, 5);
+
+  return (
+    <div className="min-h-screen bg-white font-sans">
+      {/* SEO Meta Tags */}
+      <title>Nora Baby Sleep - Expert Baby Sleep Guides, Trackers & Digital Resources</title>
+      <meta name="description" content="Shop expert digital guides, trackers, and bundles designed to help new parents master baby sleep routines, reduce night wakings, and create calm nights. Instant PDF downloads." />
+      <meta name="keywords" content="baby sleep, sleep training, newborn care, baby sleep tracker, sleep guides, parenting tools, baby sleep calculator, feeding schedule, nap timer, norababysleep.store" />
+
+      {/* Top Header Menu */}
+      <div className="bg-gray-50 border-b border-gray-200 py-2 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <nav className="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm">
+            <a href="https://norababysleep.store/" className="text-gray-700 hover:text-pink-600 font-medium transition-colors">Home</a>
+            <a href="https://norababysleep.store/about" className="text-gray-700 hover:text-pink-600 font-medium transition-colors">About</a>
+            <a href="https://norababysleep.store/contact" className="text-gray-700 hover:text-pink-600 font-medium transition-colors">Contact</a>
+            <a href="https://norababysleep.store/privacy-policy" className="text-gray-700 hover:text-pink-600 font-medium transition-colors">Privacy Policy</a>
+            <a href="https://norababysleep.store/disclaimer" className="text-gray-700 hover:text-pink-600 font-medium transition-colors">Disclaimer</a>
+            <a href="https://norababysleep.store/terms-and-conditions" className="text-gray-700 hover:text-pink-600 font-medium transition-colors">Terms & Conditions</a>
+          </nav>
+        </div>
+      </div>
+
+      {/* Main Header */}
+      <header className="py-4 px-4 sm:px-6 lg:px-8 bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <a href="https://norababysleep.store/" className="flex items-center">
+              <img 
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirlwOUYDgmZTAT8H5vLtRd_m5qs24_GOwP2qsitsjFcGf_d4XfKGC11uhysuTLgjZ8suE33itX7YDHJd7TUF59vy9kyuAXs1JNs24BX5RA4GNrEix_qNog6PoRB6cKW0-ctGvm2HaUY-kJhAXzFcd4Wadx9fUnkLYa4igN8Ne9a1mOpLssjCYcUmbyUFM/s224/NORA%20BABY%20SLEEP%20LOG.png" 
+                alt="Nora Baby Sleep Logo" 
+                className="h-12 w-auto"
+              />
+            </a>
+            
+            <nav className="flex flex-wrap justify-center gap-4 sm:gap-6">
+              <a href="https://norababysleep.store/" className="text-gray-700 hover:text-pink-600 font-medium transition-colors flex items-center">
+                <Home className="mr-1 h-4 w-4" />
+                Home
+              </a>
+              <a href="https://shop.norababysleep.store" className="text-gray-700 hover:text-pink-600 font-medium transition-colors flex items-center">
+                <ShoppingBag className="mr-1 h-4 w-4" />
+                Shop
+              </a>
+              <a href="https://norababysleep.store/baby-sleep-calculator" className="text-gray-700 hover:text-pink-600 font-medium transition-colors flex items-center">
+                <Calculator className="mr-1 h-4 w-4" />
+                Sleep Calculator
+              </a>
+              <a href="https://norababysleep.store/feeding-schedule-generator" className="text-gray-700 hover:text-pink-600 font-medium transition-colors flex items-center">
+                <Calendar className="mr-1 h-4 w-4" />
+                Feeding Schedule
+              </a>
+              <a href="https://norababysleep.store/nap-timer" className="text-gray-700 hover:text-pink-600 font-medium transition-colors flex items-center">
+                <Timer className="mr-1 h-4 w-4" />
+                Nap Timer
+              </a>
+              <a href="https://norababysleep.store/growth-percentile-estimator" className="text-gray-700 hover:text-pink-600 font-medium transition-colors flex items-center">
+                <ScaleIcon className="mr-1 h-4 w-4" />
+                Growth Estimator
+              </a>
+              <a href="https://norababysleep.store/diaper-feed-counter" className="text-gray-700 hover:text-pink-600 font-medium transition-colors flex items-center">
+                <Baby className="mr-1 h-4 w-4" />
+                Counter
+              </a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-blue-50 to-white"></div>
+        <div className="relative max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Better Sleep for Babies. <br />
+            <span className="text-pink-600">Peaceful Nights</span> for Parents.
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Download expert-designed baby sleep guides, trackers, and bundles today.
+          </p>
+          <button 
+            onClick={scrollToProducts}
+            className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center mx-auto"
+          >
+            Shop Products
+            <ChevronDown className="ml-2 h-5 w-5" />
+          </button>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="h-8 w-8 text-pink-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Instant PDF Downloads</h3>
+              <p className="text-gray-600">Get immediate access to your digital products after purchase.</p>
+            </div>
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Moon className="h-8 w-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Gentle, Research-Based Sleep Support</h3>
+              <p className="text-gray-600">Methods backed by pediatric sleep science and expert guidance.</p>
+            </div>
+            <div className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="h-8 w-8 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Trusted by New Parents Worldwide</h3>
+              <p className="text-gray-600">Join thousands of families who have transformed their sleep routines.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Parent Tools Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-50 to-blue-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Free Parenting Tools
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Helpful calculators and trackers to support your parenting journey
+            </p>
+          </div>
+          
+          {renderToolContent()}
+          
+          {activeTool && (
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setActiveTool(null)}
+                className="text-pink-600 hover:text-pink-700 font-medium flex items-center justify-center mx-auto"
+              >
+                <ChevronLeft className="mr-1 h-4 w-4" />
+                Back to All Tools
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Product Grid */}
+      <section id="products" className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Our Digital Baby Sleep Products
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Expert-designed resources to help you and your baby get the rest you both deserve.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {products.map((product) => (
+              <div key={product.id} className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group">
+                <div className="aspect-w-3 aspect-h-4 overflow-hidden">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="font-semibold text-gray-900 mb-2 text-lg">{product.name}</h3>
+                  <p className="text-pink-600 font-bold text-xl mb-3">{product.price}</p>
+                  <p className="text-gray-600 text-sm mb-4">{product.description}</p>
+                  <a 
+                    href={product.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center"
+                  >
+                    <Download className="mr-2 h-4 w-4" />
+                    Get Instant Access
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              What Parents Are Saying
+            </h2>
+            <p className="text-xl text-gray-600">
+              Real results from real families
+            </p>
+          </div>
+          
+          <div 
+            className="relative max-w-4xl mx-auto"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            <div className="bg-white p-8 rounded-xl shadow-sm">
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className="text-gray-700 mb-6 italic text-lg">"{testimonials[currentTestimonial].text}"</p>
+              <div className="flex items-center">
+                <img 
+                  src={testimonials[currentTestimonial].avatar} 
+                  alt={testimonials[currentTestimonial].author}
+                  className="w-12 h-12 rounded-full mr-4"
+                />
+                <span className="font-semibold text-gray-900 text-lg">{testimonials[currentTestimonial].author}</span>
+              </div>
+            </div>
+            
+            <div className="flex justify-center mt-6 space-x-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTestimonial(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                    index === currentTestimonial ? 'bg-pink-500' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+            
+            <p className="text-center mt-8 text-gray-600">
+              Join over 10,000+ happy parents who have transformed their baby's sleep!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Baby Sleep FAQ
+            </h2>
+            <p className="text-xl text-gray-600">
+              Expert answers to common baby sleep questions
+            </p>
+          </div>
+          
+          <div className="space-y-6">
+            {visibleFAQs.map((faq, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                <p className="text-gray-600">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+          
+          {!showAllFAQs && (
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setShowAllFAQs(true)}
+                className="text-pink-600 hover:text-pink-700 font-medium flex items-center justify-center mx-auto"
+              >
+                Show All FAQs
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-pink-50 to-blue-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Get Free Baby Sleep Tips + Exclusive Discounts
+          </h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Join our community of peaceful parents and receive weekly sleep guidance.
+          </p>
+          
+          <form className="max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email address"
+                className="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-full shadow-md hover:shadow-lg transition-all duration-300 whitespace-nowrap"
+              >
+                Subscribe
+              </button>
+            </div>
+          </form>
+          <p className="text-sm text-gray-600 mt-4">
+            Get instant access to our free sleep guide when you subscribe!
+          </p>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <img 
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirlwOUYDgmZTAT8H5vLtRd_m5qs24_GOwP2qsitsjFcGf_d4XfKGC11uhysuTLgjZ8suE33itX7YDHJd7TUF59vy9kyuAXs1JNs24BX5RA4GNrEix_qNog6PoRB6cKW0-ctGvm2HaUY-kJhAXzFcd4Wadx9fUnkLYa4igN8Ne9a1mOpLssjCYcUmbyUFM/s224/NORA%20BABY%20SLEEP%20LOG.png" 
+                alt="Nora Baby Sleep Logo" 
+                className="h-12 w-auto mb-4"
+              />
+              <p className="text-gray-400">
+                Expert-designed digital products to help parents master baby sleep routines and create peaceful nights.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Main Navigation</h3>
+              <ul className="space-y-2">
+                <li><a href="https://norababysleep.store/" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><Home className="mr-2 h-4 w-4" /> Home</a></li>
+                <li><a href="https://shop.norababysleep.store" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><ShoppingBag className="mr-2 h-4 w-4" /> Shop</a></li>
+                <li><a href="https://norababysleep.store/baby-sleep-calculator" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><Calculator className="mr-2 h-4 w-4" /> Sleep Calculator</a></li>
+                <li><a href="https://norababysleep.store/feeding-schedule-generator" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><Calendar className="mr-2 h-4 w-4" /> Feeding Schedule</a></li>
+                <li><a href="https://norababysleep.store/nap-timer" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><Timer className="mr-2 h-4 w-4" /> Nap Timer</a></li>
+                <li><a href="https://norababysleep.store/growth-percentile-estimator" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><ScaleIcon className="mr-2 h-4 w-4" /> Growth Estimator</a></li>
+                <li><a href="https://norababysleep.store/diaper-feed-counter" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><Baby className="mr-2 h-4 w-4" /> Counter</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Support & Legal</h3>
+              <ul className="space-y-2">
+                <li><a href="https://norababysleep.store/about" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><User className="mr-2 h-4 w-4" /> About</a></li>
+                <li><a href="https://norababysleep.store/contact" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><Phone className="mr-2 h-4 w-4" /> Contact</a></li>
+                <li><a href="https://norababysleep.store/privacy-policy" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><Shield className="mr-2 h-4 w-4" /> Privacy Policy</a></li>
+                <li><a href="https://norababysleep.store/disclaimer" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><FileText className="mr-2 h-4 w-4" /> Disclaimer</a></li>
+                <li><a href="https://norababysleep.store/terms-and-conditions" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><FileText className="mr-2 h-4 w-4" /> Terms & Conditions</a></li>
+                <li><a href="mailto:norababysleep@gmail.com" className="text-gray-400 hover:text-pink-400 transition-colors flex items-center"><Mail className="mr-2 h-4 w-4" /> norababysleep@gmail.com</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <p>&copy; 2025 Nora Baby Sleep. All rights reserved.</p>
+            <p className="text-sm mt-2">norababysleep.store - Your trusted partner in baby sleep solutions</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
