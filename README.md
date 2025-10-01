@@ -41,7 +41,7 @@ Our mission is to make parenting easier with:
 
 ## 🌍 Website & Blog
 - **Website:** [www.norababysleep.store](https://www.norababysleep.store)  
-- **Shop:** [store.norababysleep.store](https://shop.norababysleep.store)  
+- **Shop:** [shop.norababysleep.store](https://shop.norababysleep.store)  
 - **Blog:** Tips and articles on parenting, sleep, and newborn care.  
 
 ---
