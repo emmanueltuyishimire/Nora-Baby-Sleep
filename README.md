@@ -16,7 +16,7 @@ We create **high-quality, research-based digital products** for new parents:
 - **Baby Sleep Training Pack (Bundle)** – Focused tools for better sleep routines.  
 - **The Ultimate Parent Sleep & Care Bundle** – All-in-one solution for sleep and care.  
 
-👉 All products are available on our [Gumroad Store](http://store.norababysleep.store).  
+👉 All products are available on our [Gumroad Store](https://shop.norababysleep.store).  
 
 ---
 
