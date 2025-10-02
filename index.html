@@ -1,0 +1,1098 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+    
+                
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shop expert digital guides, trackers, and bundles designed to help new parents master baby sleep routines, reduce night wakings, and create calm nights. Instant PDF downloads.">
+    <meta name="keywords" content="baby sleep, sleep training, newborn care, baby sleep tracker, sleep guides, parenting tools, baby sleep calculator, feeding schedule, nap timer, norababysleep.store">
+    <title>Nora Baby Sleep - Expert Baby Sleep Guides, Trackers & Digital Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        .top-header {
+            background-color: #f9fafb;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 8px 0;
+        }
+        
+        .top-header nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .top-header a {
+            text-decoration: none;
+            color: #4b5563;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .top-header a:hover {
+            color: #ec4899;
+        }
+        
+        .main-header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            height: 48px;
+        }
+        
+        .main-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+        
+        .main-nav a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .main-nav a:hover {
+            color: #ec4899;
+            background-color: #fef2f2;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #fce7f3 0%, #dbeafe 50%, #ffffff 100%);
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+        
+        .hero h1 span {
+            color: #ec4899;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: #4b5563;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            background: linear-gradient(135deg, #db2777 0%, #9333ea 100%);
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #1f2937;
+        }
+        
+        .section-title p {
+            font-size: 1.25rem;
+            color: #4b5563;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Why Choose Us */
+        .features {
+            background-color: #f9fafb;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background-color: #fce7f3;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        
+        .feature-icon i {
+            font-size: 28px;
+            color: #ec4899;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1f2937;
+        }
+        
+        .feature-card p {
+            color: #4b5563;
+            font-size: 1rem;
+        }
+        
+        /* Tools Section */
+        .tools-section {
+            background: linear-gradient(135deg, #fce7f3 0%, #dbeafe 100%);
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .tools-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .tool-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .tool-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            border-color: #fecdd3;
+        }
+        
+        .tool-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #fce7f3;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        
+        .tool-icon i {
+            font-size: 20px;
+            color: #ec4899;
+        }
+        
+        .tool-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+        
+        .tool-card p {
+            color: #4b5563;
+            font-size: 0.875rem;
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 256px;
+            object-fit: cover;
+        }
+        
+        .product-content {
+            padding: 24px;
+        }
+        
+        .product-content h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+        
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ec4899;
+            margin-bottom: 12px;
+        }
+        
+        .product-description {
+            color: #4b5563;
+            font-size: 0.875rem;
+            margin-bottom: 16px;
+            min-height: 60px;
+        }
+        
+        .product-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .product-btn:hover {
+            background: linear-gradient(135deg, #db2777 0%, #9333ea 100%);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background-color: #f9fafb;
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
+            text-align: center;
+        }
+        
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.125rem;
+            color: #374151;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #ec4899;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #1f2937;
+        }
+        
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #d1d5db;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dot.active {
+            background-color: #ec4899;
+        }
+        
+        /* FAQ */
+        .faq-item {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
+            margin-bottom: 16px;
+        }
+        
+        .faq-question {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+        
+        .faq-answer {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        
+        .show-more-btn {
+            display: block;
+            margin: 32px auto 0;
+            background: none;
+            border: none;
+            color: #ec4899;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .show-more-btn:hover {
+            background-color: #fef2f2;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, #fce7f3 0%, #dbeafe 100%);
+            text-align: center;
+        }
+        
+        .newsletter-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            .newsletter-form {
+                flex-direction: row;
+            }
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 16px 24px;
+            border: 2px solid #e5e7eb;
+            border-radius: 9999px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #ec4899;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 48px 0 32px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .footer-logo {
+            height: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .footer-about p {
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+        
+        .footer h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ec4899;
+        }
+        
+        .footer-links i {
+            font-size: 14px;
+            width: 16px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.125rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            .btn {
+                padding: 14px 24px;
+                font-size: 1rem;
+            }
+            
+            .main-nav {
+                gap: 8px;
+            }
+            
+            .main-nav a {
+                padding: 6px 10px;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="container">
+            <nav>
+                <a href="https://norababysleep.store/">Home</a>
+                <a href="https://norababysleep.store/about">About</a>
+                <a href="https://norababysleep.store/contact">Contact</a>
+                <a href="https://norababysleep.store/privacy-policy">Privacy Policy</a>
+                <a href="https://norababysleep.store/disclaimer">Disclaimer</a>
+                <a href="https://norababysleep.store/terms-and-conditions">Terms & Conditions</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirlwOUYDgmZTAT8H5vLtRd_m5qs24_GOwP2qsitsjFcGf_d4XfKGC11uhysuTLgjZ8suE33itX7YDHJd7TUF59vy9kyuAXs1JNs24BX5RA4GNrEix_qNog6PoRB6cKW0-ctGvm2HaUY-kJhAXzFcd4Wadx9fUnkLYa4igN8Ne9a1mOpLssjCYcUmbyUFM/s224/NORA%20BABY%20SLEEP%20LOG.png" alt="Nora Baby Sleep Logo" class="logo">
+                <nav class="main-nav">
+                    <a href="https://norababysleep.store/"><i class="fas fa-home"></i> Home</a>
+                    <a href="https://shop.norababysleep.store"><i class="fas fa-shopping-bag"></i> Shop</a>
+                    <a href="https://norababysleep.store/baby-sleep-calculator"><i class="fas fa-calculator"></i> Sleep Calculator</a>
+                    <a href="https://norababysleep.store/feeding-schedule-generator"><i class="fas fa-calendar"></i> Feeding Schedule</a>
+                    <a href="https://norababysleep.store/nap-timer"><i class="fas fa-clock"></i> Nap Timer</a>
+                    <a href="https://norababysleep.store/growth-percentile-estimator"><i class="fas fa-weight-scale"></i> Growth Estimator</a>
+                    <a href="https://norababysleep.store/diaper-feed-counter"><i class="fas fa-baby"></i> Counter</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Better Sleep for Babies. <br><span>Peaceful Nights</span> for Parents.</h1>
+                <p>Download expert-designed baby sleep guides, trackers, and bundles today.</p>
+                <button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+                    Shop Products
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Us</h2>
+                <p>Trusted by parents worldwide for gentle, research-based sleep support</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Instant PDF Downloads</h3>
+                    <p>Get immediate access to your digital products after purchase.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3>Gentle, Research-Based Sleep Support</h3>
+                    <p>Methods backed by pediatric sleep science and expert guidance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Trusted by New Parents Worldwide</h3>
+                    <p>Join thousands of families who have transformed their sleep routines.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parent Tools Section -->
+    <section class="section tools-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Free Parenting Tools</h2>
+                <p>Helpful calculators and trackers to support your parenting journey</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="showTool('sleep')">
+                    <div class="tool-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Baby Sleep Calculator</h3>
+                    <p>Get recommended nap count, awake windows, and total sleep hours based on your baby's age.</p>
+                </div>
+                <div class="tool-card" onclick="showTool('feeding')">
+                    <div class="tool-icon">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <h3>Feeding Schedule Generator</h3>
+                    <p>Generate personalized feeding schedules based on baby's age and feeding type.</p>
+                </div>
+                <div class="tool-card" onclick="showTool('growth')">
+                    <div class="tool-icon">
+                        <i class="fas fa-weight-scale"></i>
+                    </div>
+                    <h3>Growth Percentile Estimator</h3>
+                    <p>Estimate your baby's growth percentile based on weight and age.</p>
+                </div>
+                <div class="tool-card" onclick="showTool('nap')">
+                    <div class="tool-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Nap Timer / Bedtime Countdown</h3>
+                    <p>Calculate the optimal next nap or bedtime based on when your baby woke up.</p>
+                </div>
+                <div class="tool-card" onclick="showTool('counter')">
+                    <div class="tool-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h3>Diaper & Feed Counter</h3>
+                    <p>Track daily feeds and diaper changes with simple click counters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Grid -->
+    <section id="products" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Digital Baby Sleep Products</h2>
+                <p>Expert-designed resources to help you and your baby get the rest you both deserve.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjiKfGzhJQvBLTnih07BH9fRskAJMB9qFjqNZueqPzAOwzha-tyqMm-zNpRPyRX1kZCiMlungvJOyaozTU5XejxmKTD5nBQ7LITfZibtcfrsqb6Cwsb1kZgcQrk3uVRqM5wP-jKs1BWMXZU0X1cQgLFzup805a3rYe7g_5d8xTj4ttyr168lmTB1wV44V0/s1600/One-Year%20Simple%20Monthly%20Sleep%20Tracker%20Planner%20%20(PDF).png" alt="One-Year Simple Monthly Sleep Tracker Planner (PDF)" class="product-image">
+                    <div class="product-content">
+                        <h3>One-Year Simple Monthly Sleep Tracker Planner (PDF)</h3>
+                        <div class="product-price">$9.99</div>
+                        <p class="product-description">A simple, year-long baby sleep tracking planner to help parents build consistent sleep routines.</p>
+                        <a href="http://shop.norababysleep.store/l/khemas?layout=profile" target="_blank" class="product-btn">
+                            <i class="fas fa-download"></i> Get Instant Access
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhU-s4cpOQDb2XRUG2ugALwXHI1PvfewbbW6-AsDFA5XkHiVFbp7AWpbLqSIAp3jKZeM3BJKhSRt2-z5JrjNF17o6AWHFB-qeeoT7eXxj4_DqqvDv7X7JlSG-DBHNafUBSlQZUtDTGAw54wF4t_EvagWhEVezIdCC_YoXnttIbBy7cHW1Zr5cpp-U6aYg8/s1600/Simple%20%2C%20Clean%2C%20and%20Minimal%20Sleep%20Tracker%20Sheet%20for%20Babies.png" alt="Simple, Clean, and Minimal Sleep Tracker Sheet for Babies (PDF)" class="product-image">
+                    <div class="product-content">
+                        <h3>Simple, Clean, and Minimal Sleep Tracker Sheet for Babies (PDF)</h3>
+                        <div class="product-price">$4.99</div>
+                        <p class="product-description">A minimalist sleep log sheet designed for quick, stress-free daily tracking.</p>
+                        <a href="http://shop.norabysleep.store/l/rdgkw?layout=profile" target="_blank" class="product-btn">
+                            <i class="fas fa-download"></i> Get Instant Access
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjqhxQqodfUfgviCzOCsWm6s_oUGgT4g64rMHgIIxQMdfpLzl5r40FLNX543k4XeKoq26WLNo0JioEPFRdByY2GKBJuEqC8Iact5ysNbZ8VnZzKhiZJfRAtcUNG0_Npx_AuF1tOoqZ975X0P-ZfIu9iGiNn9Jj89h3uyECh7_ugJYILwkl5cmNQWP5tkk/s1600/The%20New%20Parent%E2%80%99s%20Guide%20to%20NAPS%20%28PDF%20+%20Editable%20Canva%20Template%29.png" alt="The New Parent’s Guide to NAPS (PDF + Editable Canva Template)" class="product-image">
+                    <div class="product-content">
+                        <h3>The New Parent’s Guide to NAPS (PDF + Editable Canva Template)</h3>
+                        <div class="product-price">$14.99</div>
+                        <p class="product-description">A comprehensive nap schedule guide for newborns to toddlers, editable in Canva.</p>
+                        <a href="http://shop.norababysleep.store/l/lgahp?layout=profile" target="_blank" class="product-btn">
+                            <i class="fas fa-download"></i> Get Instant Access
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioTFAi4xCyqie1AKqfHzorxWcfAaaolTr1DGdujXSRC3Mk2L1xnft7KvUsdx2hmk4EuJT_0mX3tJAQa3f5scbZH3hQ0TIxFpFO1S_Iw3YCcvRGlwbdZp-MHeSxdSlcg_t09IxRllfR6w5YiAYra6mZ5Ik1Q180Uuo8mqDKb76WV3i9KrwbKENCezYJkp0/s1600/Newborn%20Care%20Booklet%20PDF%20%20%3A%20Complete%20Guide%20for%20Parents.png" alt="Newborn Care Booklet PDF: Complete Guide for Parents" class="product-image">
+                    <div class="product-content">
+                        <h3>Newborn Care Booklet PDF: Complete Guide for Parents</h3>
+                        <div class="product-price">$19.99</div>
+                        <p class="product-description">A new parent must-have booklet covering baby sleep, feeding, and care essentials.</p>
+                        <a href="http://shop.norababysleep.store/l/ognwi?layout=profile" target="_blank" class="product-btn">
+                            <i class="fas fa-download"></i> Get Instant Access
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRO8HO-ap4VWW3zHJmvdKoX9TBI3mIRwOX7c5x3B-O1OA1XyGrUlx1W7OEZG9Sh_-UVw_SZe9EB0MDjJ2B7FT5K7JwLRzvwEZkX0WoKN5fT8OBlOZLmm1o28c8LwNqb1YSq-7c1ZVARDfSg53buciZEDtHgoYTD2Fun-OSaNdhva6x-_FZ3mRmjhY8j1c/s1600/Baby%20Sleep%20Training%20eBook%20%20%3A%20Instant%20Download%20PDF%20Guide%20to%20Help%20Parents%20Get%20Their%20Baby%20to%20Sleep%20Through%20the%20Night%20Without%20Night%20Feedings.png" alt="Baby Sleep Training eBook (PDF Guide)" class="product-image">
+                    <div class="product-content">
+                        <h3>Baby Sleep Training eBook (PDF Guide)</h3>
+                        <div class="product-price">$24.99</div>
+                        <p class="product-description">A step-by-step sleep training guide to help babies sleep through the night without night feedings.</p>
+                        <a href="http://shop.norababysleep.store/l/kcwznv?layout=profile" target="_blank" class="product-btn">
+                            <i class="fas fa-download"></i> Get Instant Access
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyB_-XyUrlg4Pr0uU6SYjnhFTBkUpjtrXlAAQedJ0aNQHbwWqXqby6AYZjPgMEmwCLPI_U-QtHQQbAsH0Cc1sO7L6u4-FzEzZ-fNkjcD0HTSS7cv5PeQxPJKxNwxAbB_kKS66QhNWr0_tCHndrPac1tm8zbTKmBm9qiFZ1wJgfyO8YwH06WkMFN_T_YCE/s1600/The%20New%20Parent%20Starter%20Kit.png" alt="The New Parent Starter Kit (Bundle)" class="product-image">
+                    <div class="product-content">
+                        <h3>The New Parent Starter Kit (Bundle)</h3>
+                        <div class="product-price">$39.99</div>
+                        <p class="product-description">A starter bundle including sleep trackers, guides, and routines for new parents.</p>
+                        <a href="http://shop.norababysleep.store/l/TheNewParentStarterKit?layout=profile" target="_blank" class="product-btn">
+                            <i class="fas fa-download"></i> Get Instant Access
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhLqRXQPiWhemB1WEWxRZJriqT_vkXUgsBeV9q5p6Kf5pEOYbjI15uJ-wsSLepsoIbnmJkUJKWXPdoVnL4YtPm8i_60O3-8NOWT6rgt9GjjmzeQr75ICNiwm1hG0W78beSMiswCifLzUseEo7jsDxZsRwCJYJ2As_egnn1kYzBeeUdzZwuLw8CWk8_ZTsE/s1600/Baby%20Sleep%20Training%20Pack.png" alt="Baby Sleep Training Pack (Bundle)" class="product-image">
+                    <div class="product-content">
+                        <h3>Baby Sleep Training Pack (Bundle)</h3>
+                        <div class="product-price">$49.99</div>
+                        <p class="product-description">A complete training pack to help parents master baby sleep routines.</p>
+                        <a href="http://shop.norababysleep.store/l/BabySleepTrainingPack?layout=profile" target="_blank" class="product-btn">
+                            <i class="fas fa-download"></i> Get Instant Access
+                        </a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEijkF9mm6XGNuuoSSRhB5tlksCzJgoQpwO2YhP14kt2W5RfNwpeu-akZJUgze3Nc3DWO92ytsOO81Yd7JgfxSeJDX0yzCeFgJ7B2ucl8TQ-XxyWJxa6f-eIle933goEKIIlYSnnfKi3ekRFty0UtAOojEKXKBJetdOISg6HwC2B8F0Fv_B2-tYqxohI9mI/s1600/The%20Ultimate%20Parent%20Sleep%20%26%20Care%20Bundle.png" alt="The Ultimate Parent Sleep & Care Bundle" class="product-image">
+                    <div class="product-content">
+                        <h3>The Ultimate Parent Sleep & Care Bundle</h3>
+                        <div class="product-price">$79.99</div>
+                        <p class="product-description">Our best-value bundle with all guides, trackers, and sleep training resources in one package.</p>
+                        <a href="http://shop.norababysleep.store/l/TheUltimateParentSleepandCareBundle?layout=profile" target="_blank" class="product-btn">
+                            <i class="fas fa-download"></i> Get Instant Access
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Parents Are Saying</h2>
+                <p>Real results from real families</p>
+            </div>
+            <div class="testimonial-container">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The sleep training pack changed our lives! Our baby sleeps through the night now."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-name">Sarah M.</div>
+                    </div>
+                </div>
+                <div class="testimonial-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <p style="text-align: center; margin-top: 24px; color: #4b5563;">
+                    Join over 10,000+ happy parents who have transformed their baby's sleep!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Baby Sleep FAQ</h2>
+                <p>Expert answers to common baby sleep questions</p>
+            </div>
+            <div id="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">What is the 3-3-3 rule for baby sleep?</div>
+                    <div class="faq-answer">The 3-3-3 rule suggests that by 3 months old, babies should be taking 3 naps per day, with 3 hours of awake time between naps, and sleeping for 3-hour stretches at night.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What do you need for baby sleep?</div>
+                    <div class="faq-answer">Essential items include a safe crib with firm mattress, fitted sheet, sleep sack or swaddle, white noise machine, blackout curtains, and a consistent bedtime routine.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the best baby sleep aid?</div>
+                    <div class="faq-answer">White noise machines, sleep sacks, and consistent bedtime routines are among the most effective and safe sleep aids. Avoid sleep positioners or loose bedding.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How to stop baby from waking every hour?</div>
+                    <div class="faq-answer">Establish consistent sleep routines, ensure proper feeding during the day, create a sleep-conducive environment, and gradually teach self-soothing skills appropriate for your baby's age.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the fastest sleep training method?</div>
+                    <div class="faq-answer">The 'Cry It Out' (Extinction) method can show results in 3-7 days, but gentler methods like 'Ferber' or 'Chair Method' may take 1-2 weeks with less stress for both baby and parents.</div>
+                </div>
+            </div>
+            <button id="show-more-btn" class="show-more-btn">
+                Show All FAQs
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="section newsletter">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get Free Baby Sleep Tips + Exclusive Discounts</h2>
+                <p>Join our community of peaceful parents and receive weekly sleep guidance.</p>
+            </div>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+            <p style="text-align: center; margin-top: 16px; color: #4b5563; font-size: 0.875rem;">
+                Get instant access to our free sleep guide when you subscribe!
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirlwOUYDgmZTAT8H5vLtRd_m5qs24_GOwP2qsitsjFcGf_d4XfKGC11uhysuTLgjZ8suE33itX7YDHJd7TUF59vy9kyuAXs1JNs24BX5RA4GNrEix_qNog6PoRB6cKW0-ctGvm2HaUY-kJhAXzFcd4Wadx9fUnkLYa4igN8Ne9a1mOpLssjCYcUmbyUFM/s224/NORA%20BABY%20SLEEP%20LOG.png" alt="Nora Baby Sleep Logo" class="footer-logo">
+                    <p>Expert-designed digital products to help parents master baby sleep routines and create peaceful nights.</p>
+                </div>
+                <div class="footer-navigation">
+                    <h3>Main Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://norababysleep.store/"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="https://shop.norababysleep.store"><i class="fas fa-shopping-bag"></i> Shop</a></li>
+                        <li><a href="https://norababysleep.store/baby-sleep-calculator"><i class="fas fa-calculator"></i> Sleep Calculator</a></li>
+                        <li><a href="https://norababysleep.store/feeding-schedule-generator"><i class="fas fa-calendar"></i> Feeding Schedule</a></li>
+                        <li><a href="https://norababysleep.store/nap-timer"><i class="fas fa-clock"></i> Nap Timer</a></li>
+                        <li><a href="https://norababysleep.store/growth-percentile-estimator"><i class="fas fa-weight-scale"></i> Growth Estimator</a></li>
+                        <li><a href="https://norababysleep.store/diaper-feed-counter"><i class="fas fa-baby"></i> Counter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-support">
+                    <h3>Support & Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://norababysleep.store/about"><i class="fas fa-user"></i> About</a></li>
+                        <li><a href="https://norababysleep.store/contact"><i class="fas fa-phone"></i> Contact</a></li>
+                        <li><a href="https://norababysleep.store/privacy-policy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                        <li><a href="https://norababysleep.store/disclaimer"><i class="fas fa-file-alt"></i> Disclaimer</a></li>
+                        <li><a href="https://norababysleep.store/terms-and-conditions"><i class="fas fa-file-alt"></i> Terms & Conditions</a></li>
+                        <li><a href="mailto:norababysleep@gmail.com"><i class="fas fa-envelope"></i> norababysleep@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Nora Baby Sleep. All rights reserved.</p>
+                <p>norababysleep.store - Your trusted partner in baby sleep solutions</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple FAQ toggle
+        document.getElementById('show-more-btn').addEventListener('click', function() {
+            const faqContainer = document.getElementById('faq-container');
+            const hiddenFAQs = [
+                {question: "What is the best sleeping method for babies?", answer: "The safest method is placing baby on their back in a crib with a firm mattress, no loose bedding, and in the same room as parents for the first 6-12 months (room-sharing without bed-sharing)."},
+                {question: "What age is cosleeping no longer safe?", answer: "The American Academy of Pediatrics recommends room-sharing without bed-sharing for at least the first 6 months, ideally for the first year, due to SIDS risk reduction."},
+                {question: "How to tell if baby is too hot at night?", answer: "Check the back of baby's neck - if it's sweaty or hot to touch, they're likely too warm. Ideal room temperature is 68-72°F (20-22°C). Dress baby in one more layer than you're comfortable in."},
+                {question: "What helps a baby sleep naturally?", answer: "Consistent routines, exposure to natural light during the day, avoiding screens before bedtime, proper feeding schedules, and creating a calm, dark sleep environment."},
+                {question: "What medicine can I give my baby to sleep at night?", answer: "Never give sleep medication to babies without explicit direction from a pediatrician. Most sleep issues are behavioral and resolved through routine and sleep training, not medication."}
+            ];
+            
+            hiddenFAQs.forEach(faq => {
+                const faqItem = document.createElement('div');
+                faqItem.className = 'faq-item';
+                faqItem.innerHTML = `
+                    <div class="faq-question">${faq.question}</div>
+                    <div class="faq-answer">${faq.answer}</div>
+                `;
+                faqContainer.appendChild(faqItem);
+            });
+            
+            this.style.display = 'none';
+        });
+
+        // Smooth scroll for shop button
+        function scrollToProducts() {
+            document.getElementById('products').scrollIntoView({behavior: 'smooth'});
+        }
+
+        // Simple tool placeholder (in a real implementation, these would have actual functionality)
+        function showTool(toolName) {
+            alert(`This would open the ${toolName} tool. In the full version, this would display an interactive calculator.`);
+        }
+
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing! You\'ll receive our free sleep guide shortly.');
+            this.reset();
+        });
+
+        // Testimonial dots (simple version)
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', function() {
+                document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+                this.classList.add('active');
+                // In a real implementation, this would change the testimonial content
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+    
+              <script>
+                              
+              </script>
+                        </body>
+                        </html>
+                    
